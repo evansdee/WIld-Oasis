@@ -3,20 +3,22 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
+import { useSign } from "./useSign";
 
 // Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
-  const { register, formState, getValues,handleSubmit } = useForm();
+  const { register, formState, getValues,reset, handleSubmit } = useForm();
+  const {signup,isLoading} = useSign()
 
-  const {error} = formState
+  const { errors } = formState;
 
-  function onSubmit(data){
-    console.log(data)
+  function onSubmit({fullName,password,email}) {
+    signup({fullName,password,email},{onSettled:()=>reset})
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow label="Full name" error={error?.fullName?.message}>
+      <FormRow label="Full name" error={errors?.fullName?.message}>
         <Input
           type="text"
           id="fullName"
@@ -24,7 +26,7 @@ function SignupForm() {
         />
       </FormRow>
 
-      <FormRow label="Email address" error={error?.email?.message}>
+      <FormRow label="Email address" error={errors?.email?.message}>
         <Input
           type="email"
           id="email"
@@ -38,7 +40,10 @@ function SignupForm() {
         />
       </FormRow>
 
-      <FormRow label="Password (min 8 characters)" error={error?.password?.message}>
+      <FormRow
+        label="Password (min 8 characters)"
+        error={errors?.password?.message}
+      >
         <Input
           type="password"
           id="password"
@@ -52,15 +57,14 @@ function SignupForm() {
         />
       </FormRow>
 
-      <FormRow label="Repeat password" error={error?.passwordConfirm?.message}>
+      <FormRow label="Repeat password" error={errors?.passwordConfirm?.message}>
         <Input
-          type="password" 
+          type="password"
           id="passwordConfirm"
           {...register("passwordConfirm", {
             required: "og run am na",
-            validate: (value) => {
-              value === getValues.password || "og password no follow join";
-            },
+            validate: (value) =>
+              value === getValues().password || "og password no follow join",
           })}
         />
       </FormRow>

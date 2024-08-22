@@ -41,7 +41,7 @@ export default function Filter({ filterField, options = [] }) {
   const [searchParams, setSearchParam] = useSearchParams();
 
   const currentField = searchParams.get(filterField) || options.at(0).value;
-  console.log(searchParams);
+  // console.log(searchParams);
 
   function handleClick(value) {
     searchParams.set(filterField, value);

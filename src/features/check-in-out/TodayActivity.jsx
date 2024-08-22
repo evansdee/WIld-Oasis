@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { box } from 'styles/styles';
-import Button from 'ui/Button';
-import Heading from 'ui/Heading';
-import Row from 'ui/Row';
-import Spinner from 'ui/Spinner';
+import Button from '../../ui/Button';
+import Heading from '../../ui/Heading';
+import Row from '../../ui/Row';
+import Spinner from '../../ui/Spinner';
 import TodayItem from '../dashboard/TodayItem';
-import { useActivityTodayStays } from './useActivityTodayStays';
+import { useTodayActivity } from './useTodayActivity';
+// import { useTodatActivity as useActivityTodayStays } from 'useTodayActivity';
 
 const StyledToday = styled.div`
-  ${box}
+ background-color: var(--color-grey-0);
+  border: 1px solid var(--color-grey-100);
+  border-radius: var(--border-radius-md);
   padding: 3.2rem;
   display: flex;
   flex-direction: column;
@@ -37,8 +39,10 @@ const NoActivity = styled.p`
   margin-top: 0.8rem;
 `;
 
-function Today() {
-  const { isLoading, stays } = useActivityTodayStays();
+export default function TodayActivity() {
+  const { isLoading, activities:stays } = useTodayActivity();
+
+  console.log(stays)
 
   return (
     <StyledToday>
@@ -65,7 +69,6 @@ function Today() {
   );
 }
 
-export default Today;
 
 const OLDdata = [
   {

@@ -1,4 +1,4 @@
-import { useDarkMode } from 'context/DarkModeContext';
+/* eslint-disable react/prop-types */
 import { eachDayOfInterval, format, isSameDay, subDays } from 'date-fns';
 import {
   Area,
@@ -10,8 +10,9 @@ import {
   YAxis,
 } from 'recharts';
 import styled from 'styled-components';
-import Heading from 'ui/Heading';
+import Heading from '../../ui/Heading';
 import DashboardBox from './DashboardBox';
+import { useDarkMode } from '../../DarkModeToggle.jsx/DarkModeToggle';
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;

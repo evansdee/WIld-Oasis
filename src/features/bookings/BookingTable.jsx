@@ -55,7 +55,7 @@ function BookingTable() {
 
         {/* {bookings.map((booking) => (
             <BookingRow key={booking.id} booking={booking} />
-          ))} */}
+          ))} */}/
 
         {/* Render props! */}
         <Table.Body

@@ -17,6 +17,7 @@ import Booking from "./pages/Booking";
 import CheckIn from "./pages/CheckIn";
 import CheckOut from "./pages/CheckOut";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import { DarkModeProvider } from "./DarkModeToggle.jsx/DarkModeToggle";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +30,8 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
+    <DarkModeProvider>
+
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
 
@@ -74,6 +77,8 @@ function App() {
         }}
       />
     </QueryClientProvider>
+    </DarkModeProvider>
+
   );
 }
 
